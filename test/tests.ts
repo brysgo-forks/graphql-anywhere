@@ -11,4 +11,5 @@ require('source-map-support').install();
 import './anywhere';
 import './mapper';
 import './matcher';
+import './directives';
 import './utilities';

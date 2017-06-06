@@ -1,6 +1,8 @@
 # Change log
 
-### vNext
+### v3.1.0
+- Add `directives` to the `info` argument, with information about all of the directives on the current field. [PR #52](https://github.com/apollographql/graphql-anywhere/pull/52) by [brysgo](https://github.com/brysgo) and [cesarsolorzano](https://github.com/cesarsolorzano)
+- Merging overlapping fragment and inline object fields [PR #67](https://github.com/apollographql/graphql-anywhere/pull/67) by [abergenw](https://github.com/abergenw)
 
 ### v3.0.1
 - Fix behavior of getMainDefinition to allow fragment definitions to precede the main operation definition

@@ -1,4 +1,5 @@
 import {
+  DirectiveNode,
   FieldNode,
   IntValueNode,
   FloatValueNode,
@@ -76,7 +77,7 @@ supported. Use variables instead of inline arguments to overcome this limitation
   }
 }
 
-export function argumentsObjectFromField(field: FieldNode, variables: Object): Object {
+export function argumentsObjectFromField(field: FieldNode | DirectiveNode, variables: Object): Object {
   if (field.arguments && field.arguments.length) {
     const argObj: Object = {};
     field.arguments.forEach(({name, value}) => valueToObjectRepresentation(
