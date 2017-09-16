@@ -37,7 +37,7 @@ describe('graphql anywhere', () => {
   });
 
   it('works with promises', async () => {
-    const resolver = async ( fieldName, root, args, context, info, ) => {
+    const resolver = async ( fieldName, root, args, context, info ) => {
       return (await root)[info.resultKey];
     };
 
