@@ -22,14 +22,14 @@ describe('directives', () => {
   it('includes info about arbitrary directives', () => {
     const resolver = (fieldName, root, args, context, info) => {
       const { doSomethingDifferent } = info.directives;
-      let result = root[info.resultKey];
+      let data = root[info.resultKey];
       if (doSomethingDifferent) {
         if (doSomethingDifferent.but === 'notTooCrazy') {
-          return result;
+          return data;
         }
         return undefined;
       }
-      return result;
+      return data;
     };
 
     const input = {

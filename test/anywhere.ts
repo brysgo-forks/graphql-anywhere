@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import graphql, { Resolver } from '../src';
+import graphql, { Resolver, ExecInfo } from '../src';
 import gql from 'graphql-tag';
 
 describe('graphql anywhere', () => {
@@ -657,7 +657,7 @@ describe('graphql anywhere', () => {
   });
 
   it('passes info including isLeaf, resultKey and directives', () => {
-    const leafMap = {};
+    const leafMap: { [s: string]: ExecInfo } = {};
 
     const resolver: Resolver = (fieldName, root, args, context, info) => {
       leafMap[fieldName] = info;

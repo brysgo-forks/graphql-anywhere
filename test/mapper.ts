@@ -75,10 +75,10 @@ describe('result mapper', () => {
       return reactChildren[0];
     };
 
-    function gqlToReact(query): any {
+    function gqlToReact(document): any {
       return graphql(
         resolver,
-        query,
+        document,
         '',
         null,
         null,
