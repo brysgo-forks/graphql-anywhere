@@ -4,7 +4,7 @@ export declare type DirectiveInfo = {
         [argName: string]: any;
     };
 };
-export declare function getDirectiveInfoFromField(field: FieldNode): DirectiveInfo;
+export declare function getDirectiveInfoFromField(field: FieldNode, variables: Object): DirectiveInfo;
 export declare function shouldInclude(selection: SelectionNode, variables?: {
     [name: string]: any;
 }): Boolean;
