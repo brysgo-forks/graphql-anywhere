@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import graphql, { Resolver } from '../src';
+import graphql, { Resolver, ExecInfo } from '../src';
 import gql from 'graphql-tag';
 
 describe('graphql anywhere', () => {
@@ -37,7 +37,7 @@ describe('graphql anywhere', () => {
   });
 
   it('works with promises', async () => {
-    const resolver = async ( fieldName, root, args, context, info, ) => {
+    const resolver = async ( fieldName, root, args, context, info ) => {
       return (await root)[info.resultKey];
     };
 
@@ -366,7 +366,7 @@ describe('graphql anywhere', () => {
         stringField,
         numberField,
         nullField,
-        ...on Item {
+        ... on Item {
           nestedObj {
             stringField
             nullField
@@ -376,7 +376,7 @@ describe('graphql anywhere', () => {
             }
           }
         }
-        ...on Item {
+        ... on Item {
           nestedObj {
             numberField
             nullField
@@ -388,6 +388,9 @@ describe('graphql anywhere', () => {
         }
         ... on Item {
           nullObject
+        }
+        nestedObj {
+          inlinedObjectStringField
         }
       }
     `;
@@ -407,6 +410,7 @@ describe('graphql anywhere', () => {
           numberField: 7,
           nullField: null,
         },
+        inlinedObjectStringField: 'This is a string of an inlined object',
       },
       nullObject: null,
     };
@@ -427,6 +431,7 @@ describe('graphql anywhere', () => {
           numberField: 7,
           nullField: null,
         },
+        inlinedObjectStringField: 'This is a string of an inlined object',
       },
       nullObject: null,
     });
@@ -652,7 +657,7 @@ describe('graphql anywhere', () => {
   });
 
   it('passes info including isLeaf, resultKey and directives', () => {
-    const leafMap = {};
+    const leafMap: { [s: string]: ExecInfo } = {};
 
     const resolver: Resolver = (fieldName, root, args, context, info) => {
       leafMap[fieldName] = info;
@@ -663,7 +668,7 @@ describe('graphql anywhere', () => {
       {
         alias: a {
           b
-          hasDirective @yup
+          hasDirective @skip(if: false) @otherDirective(arg: $x)
         }
       }
     `;
@@ -671,21 +676,27 @@ describe('graphql anywhere', () => {
     graphql(
       resolver,
       query,
+      null,
+      null,
+      { x: 'argument' },
     );
 
     assert.deepEqual(leafMap, {
       a: {
-        directives: {},
+        directives: null,
         isLeaf: false,
         resultKey: 'alias',
       },
       b: {
-        directives: {},
+        directives: null,
         isLeaf: true,
         resultKey: 'b',
       },
       hasDirective: {
-        directives: { yup: {} },
+        directives: {
+          skip: { if: false },
+          otherDirective: { arg: 'argument'},
+        },
         isLeaf: true,
         resultKey: 'hasDirective',
       },

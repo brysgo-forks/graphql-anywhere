@@ -147,7 +147,11 @@ function executeSelectionSet(
         const resultFieldKey = resultKeyNameFromField(selection);
 
         if (fieldResult !== undefined) {
-          result[resultFieldKey] = fieldResult;
+          if (result[resultFieldKey] === undefined) {
+            result[resultFieldKey] = fieldResult;
+          } else {
+            merge(result[resultFieldKey], fieldResult);
+          }
         }
       });
     } else {
@@ -210,7 +214,7 @@ function executeField(
   const info: ExecInfo = {
     isLeaf: !field.selectionSet,
     resultKey: resultKeyNameFromField(field),
-    directives: getDirectiveInfoFromField(field),
+    directives: getDirectiveInfoFromField(field, variables),
   };
 
   const resultOrDeferrable = resolver(fieldName, rootValue, args, contextValue, info);

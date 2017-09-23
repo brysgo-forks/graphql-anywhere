@@ -14,13 +14,7 @@ describe('directives', () => {
       }
     `;
 
-    const result = graphql(
-      resolver,
-      query,
-      '',
-      null,
-      null,
-    );
+    const result = graphql(resolver, query);
 
     assert.deepEqual(result, {});
   });
@@ -28,36 +22,30 @@ describe('directives', () => {
   it('includes info about arbitrary directives', () => {
     const resolver = (fieldName, root, args, context, info) => {
       const { doSomethingDifferent } = info.directives;
-      let result = root[info.resultKey];
+      let data = root[info.resultKey];
       if (doSomethingDifferent) {
-        if (doSomethingDifferent.but.value === 'notTooCrazy') {
-          return `${result} different`;
-        } else {
-          return `<<${result}>> incorrect directive arguments`;
+        if (doSomethingDifferent.but === 'notTooCrazy') {
+          return data;
         }
+        return undefined;
       }
-      return result;
+      return data;
     };
 
     const input = {
       a: 'something',
+      b: 'hidden',
     };
 
     const query = gql`
       {
         a @doSomethingDifferent(but: notTooCrazy)
-        b
+        b @doSomethingDifferent(but: nope)
       }
     `;
 
-    const result = graphql(
-      resolver,
-      query,
-      input,
-      null,
-      null,
-    );
+    const result = graphql(resolver, query, input);
 
-    assert.deepEqual(result, { a: 'something different' });
+    assert.deepEqual(result, { a: 'something' });
   });
 });

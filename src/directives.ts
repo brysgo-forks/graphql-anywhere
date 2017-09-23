@@ -8,18 +8,23 @@ import {
   DirectiveNode,
 } from 'graphql';
 
+import {
+  argumentsObjectFromField,
+} from './storeUtils';
+
 export type DirectiveInfo = {
   [fieldName: string]: {[argName: string]: any},
 };
 
-export function getDirectiveInfoFromField(field: FieldNode): DirectiveInfo {
-  return field.directives.reduce((directives: DirectiveInfo, directiveNode: DirectiveNode) => {
-    directives[directiveNode.name.value] = directiveNode.arguments.reduce((args, argumentNode) => {
-      args[argumentNode.name.value] = argumentNode.value;
-      return args;
-    }, {});
-    return directives;
-  }, {});
+export function getDirectiveInfoFromField(field: FieldNode, variables: Object): DirectiveInfo {
+  if (field.directives && field.directives.length) {
+    const directiveObj: DirectiveInfo = {};
+    field.directives.forEach((directive: DirectiveNode) => {
+      directiveObj[directive.name.value] = argumentsObjectFromField(directive, variables);
+    });
+    return directiveObj;
+  }
+  return null;
 }
 
 export function shouldInclude(selection: SelectionNode, variables: { [name: string]: any } = {}): Boolean {
