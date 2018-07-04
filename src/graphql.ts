@@ -273,7 +273,8 @@ function executeSubSelectedArray(
 function merge(dest, src) {
   if (
     src === null ||
-    typeof src !== 'object'
+    typeof src !== 'object' ||
+    src.constructor.name === "Gun"
   ) {
     // These types just override whatever was in dest
     return src;
