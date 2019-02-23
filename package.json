@@ -1,6 +1,7 @@
 {
-  "name": "graphql-anywhere",
-  "version": "3.1.0",
+  "name": "@brysgo/graphql-anywhere",
+  "private": false,
+  "version": "0.0.0-semantic-release",
   "description": "Run GraphQL queries with no schema and just one resolver",
   "main": "./lib/src/index.js",
   "typings": "./lib/src/index.d.ts",

@@ -2,7 +2,7 @@ scripts
 test
 typings
 .gitignore
-.travis.yml
+.circleci
 ambient.d.ts
 appveyor.yml
 CHANGELOG.md
