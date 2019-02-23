@@ -1,7 +1,7 @@
 # graphql-anywhere
 
-[![npm version](https://badge.fury.io/js/graphql-anywhere.svg)](https://badge.fury.io/js/graphql-anywhere)
-[![Build Status](https://travis-ci.org/apollographql/graphql-anywhere.svg?branch=master)](https://travis-ci.org/apollostack/graphql-anywhere)
+[![npm version](https://badge.fury.io/js/%40brysgo%2Fgraphql-anywhere.svg)](https://badge.fury.io/js/%40brysgo%2Fgraphql-anywhere)
+[![CircleCI](https://circleci.com/gh/brysgo-forks/graphql-anywhere.svg?style=shield)](https://circleci.com/gh/brysgo-forks/graphql-anywhere)
 
 Run a GraphQL query anywhere, without a GraphQL server or a schema. Just pass in one resolver. Use it together with [graphql-tag](https://github.com/apollographql/graphql-tag).
 
