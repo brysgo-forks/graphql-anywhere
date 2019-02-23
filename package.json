@@ -1,7 +1,7 @@
 {
   "name": "@brysgo/graphql-anywhere",
   "private": false,
-  "version": "0.0.0-semantic-release",
+  "version": "3.1.0",
   "description": "Run GraphQL queries with no schema and just one resolver",
   "main": "./lib/src/index.js",
   "typings": "./lib/src/index.d.ts",
@@ -34,8 +34,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "3.5.2",
-    "@types/isomorphic-fetch": "0.0.34",
     "@types/graphql": "^0.10.0",
+    "@types/isomorphic-fetch": "0.0.34",
     "@types/lodash": "^4.14.37",
     "@types/mocha": "^2.2.32",
     "@types/node": "^8.0.0",
